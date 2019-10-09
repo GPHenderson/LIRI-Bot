@@ -19,7 +19,7 @@ console.log('before the switch statement');
         case 'spotify-this-song':
             findSong(search);
             break;
-    }
+    }                               
 
 //Function to find the song
 function findSong(search){
