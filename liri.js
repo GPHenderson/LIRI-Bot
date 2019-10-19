@@ -3,6 +3,7 @@ require("dotenv").config();
 var request = require('request');
 var fs = require('fs');
 var keys = require("./keys.js");
+var axios = require ("axios")
 var Spotify = require('node-spotify-api')
 var spotify = new Spotify(keys.spotify);
 
@@ -55,11 +56,11 @@ function findBandInTown(artist) {
                 for (var concertCount = 0; concertCount < concertInfo.length; concertCount++) {
 
                     console.log("\nName of the Venue: " + concertInfo[concertCount].venue.name);
-                    appendFileSync("log.txt", "Name of the Venue: " + concertInfo[concertCount].venue.name + "\n");
+                    fs.appendFileSync("log.txt", "Name of the Venue: " + concertInfo[concertCount].venue.name + "\n");
                     console.log("Venue Location: " + concertInfo[concertCount].venue.city);
-                    appendFileSync("log.txt", "Venue Location: " + concertInfo[concertCount].venue.city + "\n");
+                    fs.appendFileSync("log.txt", "Venue Location: " + concertInfo[concertCount].venue.city + "\n");
                     console.log("Date of the Event: " + concertInfo[concertCount].datetime);
-                    appendFileSync("log.txt", "Date of the Event: " + concertInfo[concertCount].datetime + "\n");
+                    fs.appendFileSync("log.txt", "Date of the Event: " + concertInfo[concertCount].datetime + "\n");
 
                 }
 
