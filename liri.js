@@ -59,6 +59,7 @@ function getMovies(movieName) {
     request("http://www.omdbapi.com/?apikey=5494fea7&t=" + movieName, function(error, response, movieResults) {
     if (!error && response.statusCode == 200){
       var movieResults = JSON.parse(movieResults);
+      console.log(movieResults);
       console.log("Title: " + movieResults.Title);
       console.log("Release Year " + movieResults.Year);
       console.log("IMDB Rating: " + movieResults.imdbRating);
@@ -66,7 +67,8 @@ function getMovies(movieName) {
       console.log("Language: " + movieResults.Language);
       console.log("Plot: " + movieResults.Plot);
       console.log("Actors: " + movieResults.Actors);
-      console.log("Rotten Tomatoes Rating: " + movieResults.Ratings[1].Value);
+     // console.log("Rotten Tomatoes Rating: " + movieResults.Ratings[1].Value);
+      console.log("Rotten Tomatoes Rating:"+ movieResults.Ratings[0].Value);
       console.log("Rotten Tomatoes URL: " + movieResults.Website);
     }
     })
@@ -101,3 +103,13 @@ function findBandInTown(artist) {
         }
     );
 }
+//Writing a function for doThis
+function doWhatItSays() {
+
+    fs.readFile("random.txt", "utf8", function(error, data){
+  
+       var dataArr = data.split(",");
+  
+       spotifyThisSong(dataArr[1]);
+    })
+  }
