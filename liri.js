@@ -13,36 +13,66 @@ var search = process.argv[3];
 console.log(command);
 console.log('before the switch statement');
 
-    switch (command) {
-        case 'concert-this' :
-            findBandInTown(search);
-            break;
-        case 'spotify-this-song':
-            findSong(search);
-            break;
-    }                               
+switch(command) {
+    case("spotify-this-song"):
+        spotifyThisSong(search);
+        break;
+    case("movie-this"):
+        getMovies(search);
+        break;
+    case"concert-this":
+    concertThis(otherInput)
+    break;
+  case"doThis":
+  doWhatItSays()
+  break;
+  }         
 
 //Function to find the song
 function findSong(search){
     if(search == undefined)
         search = "The Sign";
 
-    spotify.search(
-        {
-            type: "track",
-            query: search
-        }, function(err, data){
-            var songs = data.tracks.items;
-            for(var songCount = 0; songCount < songs.length; songCount++){
-                console.log("\nArtist : "+songs[songCount].artists[0].name);
-                console.log("Song : "+ songs[songCount].name);
-                console.log("Preview :"+ songs[songCount].preview_url);
-                console.log("Album : "+songs[songCount].album.name);
-            }
-
-        }
-    )
+        spotify.search({ type: 'track', query: song, limit: 20 }, function(error, data) {
+            if (!error) {
+              for(var i = 0; i < data.tracks.items.length; i++) {
+               var songInfo = data.tracks.items[i]; 
+              console.log("Artist: " + songInfo.artists[0].name);
+              console.log("Song: " + songInfo.name)
+              console.log("URL: " + songInfo.preview_url);
+              console.log("Album: " + songInfo.album.name);
+              console.log("--------------------------")
+              }
+                }
+                  else {
+                  console.log("Error occurred")
+               }
+              
+          });
 }
+
+//Function to find movies
+function getMovies(movieName) {
+    if(search == undefined)
+        search = "Mr. Nobody";
+
+    request("http://www.omdbapi.com/?apikey=5494fea7&t=" + movieName, function(error, response, movieResults) {
+    if (!error && response.statusCode == 200){
+      var movieResults = JSON.parse(movieResults);
+      console.log("Title: " + movieResults.Title);
+      console.log("Release Year " + movieResults.Year);
+      console.log("IMDB Rating: " + movieResults.imdbRating);
+      console.log("Country: " + movieResults.Country);
+      console.log("Language: " + movieResults.Language);
+      console.log("Plot: " + movieResults.Plot);
+      console.log("Actors: " + movieResults.Actors);
+      console.log("Rotten Tomatoes Rating: " + movieResults.Ratings[1].Value);
+      console.log("Rotten Tomatoes URL: " + movieResults.Website);
+    }
+    })
+    }
+
+
 
 //Function to find the concerts
 function findBandInTown(artist) {
