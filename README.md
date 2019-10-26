@@ -13,4 +13,4 @@ To run this app, right click on the liri.js file in explorer on the left and cli
 
 **Spotify Search**
 
-![Video class](Oct-19-2019 10-33-27.gif)
+![Video class](/Oct-19-201910-33-27.gif)
